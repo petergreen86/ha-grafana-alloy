@@ -1,0 +1,34 @@
+#include <tunables/global>
+
+profile grafana_alloy flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+  #include <abstractions/ssl_certs>
+
+  file,
+  signal,
+  network,
+
+  # S6-Overlay & Bashio
+  /init rix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /etc/s6/** rix,
+  /run/s6/** rwix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/** rwk,
+
+  # Bashio
+  /usr/lib/bashio/** ix,
+  /tmp/** rw,
+
+  # Add-on options and rendered Alloy config
+  /data/** rw,
+  /etc/alloy/** rw,
+
+  # Alloy storage and runtime
+  /proc/** r,
+  /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
+}

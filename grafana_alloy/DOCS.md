@@ -43,7 +43,7 @@ scrape_interval: "60s"
 ## Verifying
 
 - Add-on log shows `Starting Grafana Alloy` and no remote-write errors.
-- The Alloy UI is available on port `12345` of the add-on host (`http://<HA-host>:12345`) if you expose it.
+- The Alloy UI is reachable via **Ingress** — open the add-on and click **Open Web UI** (or the Alloy sidebar panel). Note: Alloy serves some UI assets from absolute paths, so parts of the UI may not render fully behind the Ingress subpath; scraping and remote-write are unaffected.
 - In Grafana Cloud, query `up{instance="homeassistant"}` — it should report `1`.
 
 ## Troubleshooting
