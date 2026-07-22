@@ -23,8 +23,8 @@ if bashio::config.is_empty 'api_key'; then
 fi
 
 bashio::log.info "Rendering Alloy config (scrape_interval=${SCRAPE_INTERVAL})"
-envsubst '${SCRAPE_INTERVAL}' \
-    < /etc/alloy/config.alloy.tmpl \
+sed "s|\${SCRAPE_INTERVAL}|${SCRAPE_INTERVAL}|g" \
+    /etc/alloy/config.alloy.tmpl \
     > /etc/alloy/config.alloy
 
 bashio::log.info "Starting Grafana Alloy"
