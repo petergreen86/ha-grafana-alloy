@@ -1,0 +1,20 @@
+name: Grafana Alloy
+version: "1.0.0"
+slug: grafana_alloy
+description: Scrape the Home Assistant Prometheus endpoint and remote-write metrics to Grafana Cloud using Grafana Alloy.
+url: https://github.com/your-org/ha-grafana-alloy/tree/main/grafana_alloy
+arch:
+  - amd64
+  - aarch64
+init: false
+homeassistant_api: true
+options:
+  prometheus_url: ""
+  prometheus_username: ""
+  api_key: ""
+  scrape_interval: "60s"
+schema:
+  prometheus_url: url
+  prometheus_username: str
+  api_key: password
+  scrape_interval: str

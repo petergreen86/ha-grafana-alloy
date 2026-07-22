@@ -1,0 +1,27 @@
+// Scrape the Home Assistant Prometheus endpoint through the Supervisor proxy.
+// Authentication uses the add-on's SUPERVISOR_TOKEN (requires homeassistant_api: true).
+prometheus.scrape "homeassistant" {
+  targets = [{
+    __address__      = "supervisor",
+    __metrics_path__ = "/core/api/prometheus",
+    __scheme__       = "http",
+    instance         = "homeassistant",
+  }]
+
+  scrape_interval = "${SCRAPE_INTERVAL}"
+  bearer_token    = sys.env("SUPERVISOR_TOKEN")
+
+  forward_to = [prometheus.remote_write.grafana_cloud.receiver]
+}
+
+// Remote-write scraped metrics to Grafana Cloud.
+prometheus.remote_write "grafana_cloud" {
+  endpoint {
+    url = sys.env("GRAFANA_CLOUD_PROMETHEUS_URL")
+
+    basic_auth {
+      username = sys.env("GRAFANA_CLOUD_PROMETHEUS_USER")
+      password = sys.env("GRAFANA_CLOUD_API_KEY")
+    }
+  }
+}
