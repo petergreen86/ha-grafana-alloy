@@ -40,6 +40,31 @@ api_key: "glc_eyJ..."
 scrape_interval: "60s"
 ```
 
+The `api_key` field is masked in the UI and is never written to the rendered Alloy config (it is passed to Alloy via an environment variable and redacted in the Alloy UI).
+
+### Storing the token in secrets.yaml
+
+For stronger hygiene, keep the token out of the add-on configuration (and its backups) by using Home Assistant secrets:
+
+1. Add the token to `/config/secrets.yaml`:
+
+   ```yaml
+   grafana_cloud_api_key: "glc_eyJ..."
+   ```
+
+2. In the add-on **Configuration** tab, switch to **Edit in YAML** and reference the secret:
+
+   ```yaml
+   prometheus_url: "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push"
+   prometheus_username: "1234567"
+   api_key: !secret grafana_cloud_api_key
+   scrape_interval: "60s"
+   ```
+
+3. Restart the add-on. The Supervisor resolves the reference at runtime.
+
+Use a Grafana Cloud access policy token scoped to `metrics:write` only, and rotate it periodically.
+
 ## Verifying
 
 - Add-on log shows `Starting Grafana Alloy` and no remote-write errors.
