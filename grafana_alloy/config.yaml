@@ -1,5 +1,5 @@
 name: Grafana Alloy
-version: "1.0.0"
+version: "1.0.1"
 slug: grafana_alloy
 description: Scrape the Home Assistant Prometheus endpoint and remote-write metrics to Grafana Cloud using Grafana Alloy.
 url: https://github.com/petergreen86/ha-grafana-alloy/tree/main/grafana_alloy
