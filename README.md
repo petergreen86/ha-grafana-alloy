@@ -1,18 +1,13 @@
-# Home Assistant Add-on: Grafana Alloy
+# Home Assistant Add-on Repository: Grafana Alloy
 
-Scrape Home Assistant's Prometheus metrics with [Grafana Alloy](https://grafana.com/docs/alloy/) and remote-write them to Grafana Cloud.
+Home Assistant add-on repository that ships [Grafana Alloy](https://grafana.com/docs/alloy/) to scrape Home Assistant's Prometheus metrics and remote-write them to Grafana Cloud.
 
-## How it works
+## Installation
 
-```
-Home Assistant  --/api/prometheus-->  Grafana Alloy  --remote_write-->  Grafana Cloud
-   (prometheus integration)          (this add-on)                     (hosted metrics)
-```
+1. Settings → Add-ons → Add-on Store → ⋮ (top right) → **Repositories**.
+2. Add this repository's URL and close.
+3. The **Grafana Alloy** add-on appears in the store — install and configure it.
 
-Alloy scrapes HA through the Supervisor proxy using the add-on's Supervisor token — no long-lived access token needed. See [DOCS.md](DOCS.md) for setup and configuration.
+## Add-ons
 
-## Quick start
-
-1. Enable the Prometheus integration in HA (`prometheus:` in `configuration.yaml`, then restart).
-2. Install this add-on, fill in your Grafana Cloud endpoint, username, and token.
-3. Start the add-on and query `up{instance="homeassistant"}` in Grafana.
+- [**Grafana Alloy**](./grafana_alloy) — scrape HA Prometheus metrics and remote-write to Grafana Cloud. See its [DOCS](./grafana_alloy/DOCS.md).
