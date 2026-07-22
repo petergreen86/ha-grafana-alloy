@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.8.2
 FROM ${BUILD_FROM}
 
 ARG ALLOY_VERSION=v1.18.0
