@@ -73,19 +73,18 @@ Use a Grafana Cloud access policy token scoped to `metrics:write` only, and rota
 
 ## Sidebar shortcut (optional)
 
-To open the Alloy UI inline from the Home Assistant sidebar, add a `panel_iframe` entry to `/config/configuration.yaml` and restart Home Assistant:
+To open the Alloy UI inline from the Home Assistant sidebar, add a **Webpage dashboard** (the replacement for the removed `panel_iframe`):
 
-```yaml
-panel_iframe:
-  alloy:
-    title: "Alloy"
-    icon: mdi:chart-line
-    url: "http://homeassistant.local:12345"
-    require_admin: true
-```
+1. **Settings → Dashboards → Add dashboard → Webpage**.
+2. Set a title and icon (e.g. `mdi:chart-line`).
+3. Enter the URL `http://homeassistant.local:12345` (or the HA host IP + `:12345`).
+4. Create it — it appears as a sidebar entry showing the Alloy UI.
+
+Caveats:
 
 - Use an address your browser can reach (`homeassistant.local` or the HA host IP), not `supervisor`.
-- If you access Home Assistant over **https**, browsers block the embedded **http** iframe (mixed content) and the panel shows blank. This works when you reach HA over http, or if you put Alloy behind TLS.
+- If you access Home Assistant over **https**, browsers block the embedded **http** page (mixed content) and the panel shows blank. This works when you reach HA over http, or if you put Alloy behind TLS.
+- Embedding also fails if the Alloy server responds with an `X-Frame-Options` header, which the browser enforces.
 
 ## Troubleshooting
 
