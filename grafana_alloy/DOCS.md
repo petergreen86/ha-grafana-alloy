@@ -68,8 +68,24 @@ Use a Grafana Cloud access policy token scoped to `metrics:write` only, and rota
 ## Verifying
 
 - Add-on log shows `Starting Grafana Alloy` and no remote-write errors.
-- The Alloy UI is exposed on port `12345`. Click **Open Web UI** on the add-on page, or browse to `http://<HA-host>:12345`. (Ingress is not used: Alloy's UI emits absolute asset paths, which don't work behind the Ingress subpath.)
+- The Alloy UI is exposed on port `12345`. Click **Open Web UI** on the add-on page, or browse to `http://<HA-host>:12345`.
 - In Grafana Cloud, query `up{instance="homeassistant"}` — it should report `1`.
+
+## Sidebar shortcut (optional)
+
+To open the Alloy UI inline from the Home Assistant sidebar, add a `panel_iframe` entry to `/config/configuration.yaml` and restart Home Assistant:
+
+```yaml
+panel_iframe:
+  alloy:
+    title: "Alloy"
+    icon: mdi:chart-line
+    url: "http://homeassistant.local:12345"
+    require_admin: true
+```
+
+- Use an address your browser can reach (`homeassistant.local` or the HA host IP), not `supervisor`.
+- If you access Home Assistant over **https**, browsers block the embedded **http** iframe (mixed content) and the panel shows blank. This works when you reach HA over http, or if you put Alloy behind TLS.
 
 ## Troubleshooting
 
