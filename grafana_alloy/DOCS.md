@@ -68,7 +68,7 @@ Use a Grafana Cloud access policy token scoped to `metrics:write` only, and rota
 ## Verifying
 
 - Add-on log shows `Starting Grafana Alloy` and no remote-write errors.
-- The Alloy UI is reachable via **Ingress** — open the add-on and click **Open Web UI** (or the Alloy sidebar panel). Note: Alloy serves some UI assets from absolute paths, so parts of the UI may not render fully behind the Ingress subpath; scraping and remote-write are unaffected.
+- The Alloy UI is exposed on port `12345`. Click **Open Web UI** on the add-on page, or browse to `http://<HA-host>:12345`. (Ingress is not used: Alloy's UI emits absolute asset paths, which don't work behind the Ingress subpath.)
 - In Grafana Cloud, query `up{instance="homeassistant"}` — it should report `1`.
 
 ## Troubleshooting
